@@ -74,7 +74,6 @@ def vote(detail=False):
     ytest = test['label']
     xtest = test.drop('label',axis=1)
     clf = DecisionTreeClassifier(random_state=0)
-
     rfc = RandomForestClassifier(random_state=0)
     svc = svm.SVC(C=2,kernel='rbf',gamma=10,decision_function_shape='ovr',probability=True)
     gra = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0,max_depth=1, random_state=0)

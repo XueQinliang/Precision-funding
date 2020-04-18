@@ -55,8 +55,8 @@ def TestModel(model,criterion,batch_size,testdata):
     
 class MLPclassifer():
     def __init__(self, in_dim, n_hidden_1, n_hidden_2, out_dim, learning_rate):
-        self.epoch = 20
-        self.batch_size = 20
+        self.epoch = 5
+        self.batch_size = 25
         self.learning_rate = learning_rate
         self.model = MLP(in_dim, n_hidden_1, n_hidden_2, out_dim)
         self.criterion = nn.CrossEntropyLoss()
@@ -105,14 +105,14 @@ class MLPclassifer():
 
 def classify():
     path = "../data.csv"
-    mlpmodel = MLPclassifer(1151,300,100,4,0.05)
+    mlpmodel = MLPclassifer(1151,300,100,4,0.01)
     train,test = LoadPandasData(path)
     mlpmodel = mlpmodel.fit(train)
     return mlpmodel
 
 if __name__ == "__main__":
     path = "../data.csv"
-    mlpmodel = MLPclassifer(1151,300,100,4,0.02)
+    mlpmodel = MLPclassifer(1151,300,100,4,0.01)
     train,test = LoadPandasData(path)
     ytrain = train['label']
     xtrain = train.drop('label',axis=1)
