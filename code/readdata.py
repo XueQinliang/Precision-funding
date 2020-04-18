@@ -19,10 +19,10 @@ class GetTensorDataSet(Dataset):  # from torch.utils.data import Dataset
         df = pd.read_csv(path)
         df = df.drop('ID',axis=1)
         df = shuffle(df)
-        df[df['label']==0] = 0
-        df[df['label']==1000] = 1
-        df[df['label']==1500] = 2
-        df[df['label']==2000] = 3
+        df['label'][df['label']==0] = 0
+        df['label'][df['label']==1000] = 1
+        df['label'][df['label']==1500] = 2
+        df['label'][df['label']==2000] = 3
         col_names = df.columns.values.tolist()  # 获取列的名字
         Range = (0,0)
         if mode == 'train':
@@ -45,14 +45,15 @@ def LoadTensorData(path):
     testdata = GetTensorDataSet(path,'test')
     return traindata, testdata
     
-def LoadPandasData(path):
+def LoadPandasData(path,noid=True):
     data = pd.read_csv(path)
-    data = data.drop('ID',axis=1)
+    if noid:
+        data = data.drop('ID',axis=1)
     data = shuffle(data)
-    data[data['label']==0] = 0
-    data[data['label']==1000] = 1
-    data[data['label']==1500] = 2
-    data[data['label']==2000] = 3
+    data['label'][data['label']==0] = 0
+    data['label'][data['label']==1000] = 1
+    data['label'][data['label']==1500] = 2
+    data['label'][data['label']==2000] = 3
     train = data[:int(0.8*len(data))]
     test = data[int(0.8*len(data)):]
     return train, test

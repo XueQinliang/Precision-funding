@@ -112,13 +112,13 @@ def classify():
 
 if __name__ == "__main__":
     path = "../data.csv"
-    mlpmodel = MLPclassifer(1151,300,100,4,0.05)
+    mlpmodel = MLPclassifer(1151,300,100,4,0.02)
     train,test = LoadPandasData(path)
     ytrain = train['label']
     xtrain = train.drop('label',axis=1)
     ytest = test['label']
     xtest = test.drop('label',axis=1)
-    mlpmodel = mlpmodel.fit(train)
+    mlpmodel = mlpmodel.fit(train,detail=True)
     out = mlpmodel.predict(xtest)
     print(mlpmodel.score(xtest,ytest))
 #    epoch = 20
